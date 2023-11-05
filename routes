@@ -1,0 +1,56 @@
+const Employee = require("../controllers/master/Employee");
+require('../config/config');
+const Employee = require("Employee");
+require("../middleware/Employee")(Employee);
+module.exports = function (app) {
+
+    app.post(
+        CONFIG.version + "/Employee",
+        passport.authenticate("jwt", {
+            session: false,
+        }),
+        EmployeeController.createEmployee
+    );
+
+   
+    app.get(
+        CONFIG.version + "/Employee",
+        passport.authenticate("jwt", {
+            session: false,
+        }),
+        EmployeeController.GetAllEmployee
+    );
+    app.put(
+        CONFIG.version + "/business-unit/:id",
+        passport.authenticate("jwt", {
+            session: false,
+        }),
+        EmployeeController.updateEmployee
+);
+
+    
+    app.get(
+        CONFIG.version + "/business-unit/:id",
+        passport.authenticate("jwt", {
+            session: false,
+        }),
+       EmployeeController.getEmployeeByID
+    );
+
+    app.delete(
+        CONFIG.version + "/business-unit/:id",
+        passport.authenticate("jwt", {
+            session: false,
+        }),
+      EmployeeController.deleteEmployee
+    );
+
+    
+    app.post(
+        CONFIG.version + "/Employee-delete",
+        passport.authenticate("jwt", {
+            session: false,
+        }),
+     EmployeeController.deleteMultipleEmpoylee
+    );
+};
